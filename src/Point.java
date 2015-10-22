@@ -9,6 +9,7 @@
  ******************************************************************************/
 
 import java.util.Comparator;
+
 import edu.princeton.cs.algs4.StdDraw;
 
 public class Point implements Comparable<Point> {
@@ -50,9 +51,9 @@ public class Point implements Comparable<Point> {
     /**
      * Returns the slope between this point and the specified point.
      * Formally, if the two points are (x0, y0) and (x1, y1), then the slope
-     * is (y1 - y0) / (x1 - x0). For completness, the slope is defined to be
+     * is (y1 - y0) / (x1 - x0). For completeness, the slope is defined to be
      * +0.0 if the line segment connecting the two points is horizontal;
-     * Double.POSITIVE_INFINITY if the line segment is vertcal;
+     * Double.POSITIVE_INFINITY if the line segment is vertical;
      * and Double.NEGATIVE_INFINITY if (x0, y0) and (x1, y1) are equal.
      *
      * @param  that the other point
@@ -60,11 +61,17 @@ public class Point implements Comparable<Point> {
      */
     public double slopeTo(Point that) {
         /* YOUR CODE HERE */
+    	if (compareTo(that) == 0)
+    		return Double.NEGATIVE_INFINITY;
     	
+    	else if (this.x != that.x && this.y == that.y)
+    		return +0.0;
     	
+    	else if (this.x == that.x && this.y != that.y)
+    		return Double.POSITIVE_INFINITY;
     	
-    	
-		return 0;
+    	else
+    		return (that.y - this.y) / (that.x - this.x);
     }
 
     /**
@@ -81,9 +88,14 @@ public class Point implements Comparable<Point> {
      */
     public int compareTo(Point that) {
         /* YOUR CODE HERE */
+    	if (this.x == that.x && this.y == that.y)
+    		return 0;
+     	
+    	else if (this.y < that.y || this.y == that.y && this.x < that.x)
+    		return -1;
     	
-    	
-    	return 0;
+    	else
+    		return 1;
     }
 
     /**
@@ -93,7 +105,27 @@ public class Point implements Comparable<Point> {
      * @return the Comparator that defines this ordering on points
      */
     public Comparator<Point> slopeOrder() {
-        /* YOUR CODE HERE */
+    	/* YOUR CODE HERE */
+    	
+    	return new slopeCompare();
+    }
+    
+    
+    private class slopeCompare implements Comparator<Point> {
+
+		@Override
+		public int compare(Point o1, Point o2) {
+			// TODO Auto-generated method stub
+			if (slopeTo(o1) == slopeTo(o2))
+				return 0;
+			
+			else if (slopeTo(o1) > slopeTo(o2))
+				return 1;
+			
+			else
+				return -1;
+		}
+    	
     }
 
 

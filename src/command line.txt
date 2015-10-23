@@ -1,0 +1,1 @@
+javac src/test.java src/Point.java src/LineSegment.java src/BruteCollinearPoints.java src/FastCollinearPoints.java

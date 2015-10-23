@@ -2,7 +2,7 @@ import java.util.*;
 
 public class FastCollinearPoints {
 	private final List<LineSegment> segment;
-	private final List<Double> slope;
+	private final List<Point> maxpoint;
 	
 	public FastCollinearPoints(Point[] points) {
 		// finds all line segments containing 4 or more points
@@ -24,7 +24,7 @@ public class FastCollinearPoints {
 		
 		// initialize segment
 		this.segment = new ArrayList<LineSegment>();
-		this.slope = new ArrayList<Double>();
+		this.maxpoint = null;
 
 		//quicksort & find collinear points
 		for (int p = 0; p < points.length-3; p++) {
@@ -40,14 +40,15 @@ public class FastCollinearPoints {
 					}
 					
 					if(j - i >= 3) {
-						if (!slope.contains(points[p].slopeTo(points[i]))) {
-							Point temp = points[i];
-							for(int k = i+1; k <= j; k++) {
-								if(temp.compareTo(points[k]) < 0)
-									temp = points[k];
-							}
-							
-							
+						Point temp = points[i];
+						for(int k = i+1; k < j; k++) {
+							if (temp.compareTo(points[k]) < 0)
+								temp = points[k];							
+						}
+						
+						if (!maxpoint.contains(temp)) {
+							segment.add(new LineSegment(points[p], temp));
+							maxpoint.add(temp);
 						}
 					}
 					
@@ -56,6 +57,8 @@ public class FastCollinearPoints {
 				
 				else i++;
 			}
+			
+			Arrays.sort(points);
 		}
 		
 		 

@@ -18,7 +18,7 @@ public class FastCollinearPoints {
 				throw new java.lang.NullPointerException();
 			
 			if (i > 0)
-				if (points[i] == points[i-1])
+				if (points[i].compareTo(points[i-1]) == 0)
 					throw new java.lang.IllegalArgumentException();
 		}
 		
@@ -34,14 +34,14 @@ public class FastCollinearPoints {
 			while (i < points.length - 2) {
 				if (points[p].slopeOrder().compare(points[i], points[i+1]) == 0) {
 					int j;
-					for(j = i+2; j < points.length; j++) {
+					for (j = i+2; j < points.length; j++) {
 						if (points[p].slopeOrder().compare(points[i], points[j]) != 0)
 							break;
 					}
 					
-					if(j - i >= 3) {
+					if (j - i >= 3) {
 						Point temp = points[i];
-						for(int k = i+1; k < j; k++) {
+						for (int k = i+1; k < j; k++) {
 							if (temp.compareTo(points[k]) < 0)
 								temp = points[k];							
 						}

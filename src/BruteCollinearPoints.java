@@ -17,7 +17,7 @@ public class BruteCollinearPoints {
 				throw new java.lang.NullPointerException();
 			
 			if (i > 0)
-				if (points[i] == points[i-1])
+				if (points[i].compareTo(points[i-1]) == 0)
 					throw new java.lang.IllegalArgumentException();
 		}
 		
@@ -31,7 +31,7 @@ public class BruteCollinearPoints {
 					for (int l = k + 1; l < points.length; l++) {
 						
 						if (points[i].slopeOrder().compare(points[j], points[k]) == 0 && 
-							points[i].slopeOrder().compare(points[j], points[l]) == 0 ) {
+							points[i].slopeOrder().compare(points[j], points[l]) == 0) {
 							segment.add(new LineSegment(points[i], points[l]));
 						}
 						

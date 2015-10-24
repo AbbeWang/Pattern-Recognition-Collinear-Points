@@ -24,7 +24,7 @@ public class FastCollinearPoints {
 		
 		// initialize segment
 		this.segment = new ArrayList<LineSegment>();
-		this.maxpoint = null;
+		this.maxpoint = new ArrayList<Point>();
 
 		//quicksort & find collinear points
 		for (int p = 0; p < points.length-3; p++) {

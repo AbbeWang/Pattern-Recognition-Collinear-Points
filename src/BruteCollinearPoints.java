@@ -29,10 +29,12 @@ public class BruteCollinearPoints {
 			for (int j = i + 1; j < points.length - 2; j++) {
 				for (int k = j + 1; k < points.length - 1; k++) {
 					for (int l = k + 1; l < points.length; l++) {
+						
 						if (points[i].slopeOrder().compare(points[j], points[k]) == 0 && 
-								points[i].slopeOrder().compare(points[j], points[l]) == 0) {
+							points[i].slopeOrder().compare(points[j], points[l]) == 0 ) {
 							segment.add(new LineSegment(points[i], points[l]));
 						}
+						
 					}
 				}
 			}
